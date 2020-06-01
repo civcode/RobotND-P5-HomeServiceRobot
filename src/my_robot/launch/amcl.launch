@@ -1,0 +1,63 @@
+<launch>
+
+
+  <!-- Map Server Node -->
+  <arg name="map_file" default="$(find my_robot/maps/map.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/>
+
+  <!-- AMCL Node -->
+  <node name="amcl" pkg="amcl" type="amcl" output="screen">
+    <!-- remap from="/scan" to="/my_robot/laser/scan"/ -->
+    <param name="odom_frame_id" value="odom"/>
+    <param name="odom_model_type" value="diff-corrected"/>
+
+    
+    <param name="update_min_d" value="0.1"/>
+    <param name="update_min_a" value="0.3"/>
+    <param name="resample_interval" value="1"/>
+
+    <param name="max_particles" value="2000"/>
+    <param name="laser_max_range" value="10.0"/>
+    <param name="laser_max_beams" value="30"/>
+
+    <!-- Odometry Noise Parameters 
+	 1. e_rot(rot); 
+	 2. e_rot(trans); 
+	 3. e_trans(trans); 
+	 4. e_trans(rot) -->
+    <param name="odom_alpha1" value="0.005"/>
+    <param name="odom_alpha2" value="0.001"/>
+    <param name="odom_alpha3" value="0.05"/>
+    <param name="odom_alpha4" value="0.001"/>
+
+    <param name="base_frame_id" value="base_link"/>
+    <param name="global_frame_id" value="map"/>
+
+
+    <!-- If using initial pose -->
+    <param name="initial_pose_x" value="2"/>
+    <param name="initial_pose_y" value="-3"/>
+    <param name="initial_pose_a" value="1.5708"/>
+  </node>
+
+  <!-- Move Base Node -->
+  <node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
+    <!-- remap from="/scan" to="/my_robot/laser/scan"/ -->
+    <param name="base_global_planner" value="navfn/NavfnROS" />
+    
+    <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
+
+    <rosparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find my_robot)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find my_robot)/config/global_costmap_params.yaml" command="load" />
+sparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find my_robot)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find my_robot)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find my_robot)/config/base_local_planner_params.yaml" command="load" />
+  <rosparam file="$(find my_robot)/config/base_local_planner_params.yaml" command="load" />
+  </node>
+  
+  
+</launch>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  
+  <!-- speed and turn rate -->
+  <arg name="speed"  default="_speed:=1.5"/>
+  <arg name="turn"   default="_turn:=0.5"/>
+  
+  <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen" args="$(arg speed) $(arg turn)"> 
+  
+  </node>
+</launch>
