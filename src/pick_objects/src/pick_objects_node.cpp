@@ -15,7 +15,7 @@ typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseCl
 //const vector<double> goal_1 = {-3.0, 2.0, -M_PI/2};
 //const vector<double> goal_2 = {2.0, -3.0, M_PI/2};
 
-const vector<double> goal_1 = {-3.0, -3.2, 0.0};
+const vector<double> goal_1 = {-3.0, -3.3, 0.0};
 const vector<double> goal_2 = {-2.5, 2.2, -M_PI/2};
 const vector<double> goal_3 = {2.0, -3.0, M_PI/2};
 
