@@ -8,7 +8,8 @@ sleep 5
 # launch gmapping slam package
 #xterm -e " roslaunch turtlebot_gazebo gmapping_demo.launch " &
 #xterm -e " rosrun gmapping slam_gmapping scan:=scan _base_frame:=robot_footprint " &
-xterm -e " roslaunch gmapping slam_gmapping_my_robot.launch " &
+#xterm -e " roslaunch gmapping slam_gmapping_my_robot.launch " &
+xterm -e " roslaunch my_robot slam_gmapping.launch " &
 sleep 5
 
 # launch rviz with pre-defined setup
