@@ -12,7 +12,8 @@ xterm -e " roslaunch gmapping slam_gmapping_my_robot.launch " &
 sleep 5
 
 # launch rviz with pre-defined setup
-xterm -e " roslaunch turtlebot_rviz_launchers view_navigation.launch " &
+#xterm -e " roslaunch turtlebot_rviz_launchers view_navigation.launch " &
+xterm -e " roslaunch my_robot view_navigation.launch " &
 sleep 5
 
 # launch teleop twist packate
