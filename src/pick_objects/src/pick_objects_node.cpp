@@ -12,9 +12,6 @@ using namespace std;
 // Define a client for to send goal requests to the move_base server through a SimpleActionClient
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
 
-//const vector<double> goal_1 = {-3.0, 2.0, -M_PI/2};
-//const vector<double> goal_2 = {2.0, -3.0, M_PI/2};
-
 const vector<double> goal_1 = {-3.0, -3.3, 0.0};
 const vector<double> goal_2 = {-2.5, 2.2, -M_PI/2};
 const vector<double> goal_3 = {2.0, -3.0, M_PI/2};
@@ -79,6 +76,7 @@ bool moveAndWait(MoveBaseClient* ac, string frame_id, vector<double> pose) {
 int main(int argc, char** argv) {
   // Initialize the pick_objects node
   ros::init(argc, argv, "pick_objects");
+  ros::NodeHandle n;
 
   //tell the action client that we want to spin a thread by default
   MoveBaseClient ac("move_base", true);
@@ -87,6 +85,14 @@ int main(int argc, char** argv) {
   while(!ac.waitForServer(ros::Duration(5.0))){
     ROS_INFO("Waiting for the move_base action server to come up");
   }
+
+  // push goal poses to parameter server
+  //n.setParam("my_test_param", "this is a test param");
+  ROS_INFO("Sending target positions to parameter server");
+  n.setParam("/pick_objects/goal_1", goal_1);
+  n.setParam("/pick_objects/goal_2", goal_2);
+  n.setParam("/pick_objects/goal_3", goal_3);
+  ros::spinOnce();
 
   // parse command line options
   po::options_description desc("command options");

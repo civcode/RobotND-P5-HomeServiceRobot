@@ -12,9 +12,9 @@ namespace po = boost::program_options;
 //const vector<double> goal_1 = {-3.0, 2.0, -M_PI/2};
 //const vector<double> goal_2 = {2.0, -3.0, M_PI/2};
 
-const vector<double> goal_1 = {-3.0, -3.2, 0.0};
-const vector<double> goal_2 = {-2.5, 2.2, -M_PI/2};
-const vector<double> goal_3 = {2.0, -3.0, M_PI/2};
+//const vector<double> goal_1 = {-3.0, -3.2, 0.0};
+//const vector<double> goal_2 = {-2.5, 2.2, -M_PI/2};
+//const vector<double> goal_3 = {2.0, -3.0, M_PI/2};
 
 const double distance_threshold = 0.2;
 
@@ -61,6 +61,7 @@ int main( int argc, char** argv )
   // Subscribe to robot pose message
   ros::Subscriber sub = n.subscribe("/robot_pose", 10, robotPoseCallback);
 
+  
   // Parse command line options
   po::options_description desc("command options");
   po::variables_map vm;
@@ -85,6 +86,28 @@ int main( int argc, char** argv )
     return 1;
   }
 
+
+  // get marker positions 
+  vector<double> goal_1;
+  vector<double> goal_2;
+  vector<double> goal_3;
+
+  if (vm["use_time_delay"].as<bool>()) {
+    // use dummy positions
+    double pos_1[] = {-3.0, -3.3, 0.0};
+    double pos_2[] = {-2.5, 2.2, 0.0};
+    double pos_3[] = {2.0, -3.0, 0.0};
+
+    goal_1.assign(pos_1, pos_1+3);
+    goal_2.assign(pos_2, pos_2+3);
+    goal_3.assign(pos_3, pos_3+3);
+
+  } else {
+    // get marker positions from parameter server
+    while(!n.getParam("/pick_objects/goal_1", goal_1) && ros::ok()) {ros::Duration(1.0).sleep();};
+    while(!n.getParam("/pick_objects/goal_2", goal_2) && ros::ok()) {ros::Duration(1.0).sleep();};
+    while(!n.getParam("/pick_objects/goal_3", goal_3) && ros::ok()) {ros::Duration(1.0).sleep();};
+  }
 
   // Set our initial shape type to be a cube
   //uint32_t shape = visualization_msgs::Marker::CUBE;
