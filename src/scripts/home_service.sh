@@ -6,7 +6,7 @@ xterm -e " roslaunch turtlebot_gazebo turtlebot_world.launch world_file:=/home/w
 sleep 6 
 
 # launch rviz with pre-defined setup
-xterm -e " roslaunch turtlebot_rviz_launchers view_navigation.launch " &
+xterm -e " roslaunch my_robot view_navigation.launch " &
 sleep 6
 
 # launch amcl package with turtlebot configuration
