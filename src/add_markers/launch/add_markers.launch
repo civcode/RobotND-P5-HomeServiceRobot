@@ -1,0 +1,10 @@
+<launch>
+  <!-- launch robot_pose_publisher -->
+  <node name="robot_pose_publisher" pkg="robot_pose_publisher" type="robot_pose_publisher"
+  output="screen">
+  </node>
+
+  <!-- launch add_markers node -->
+  <node name="add_markers" pkg="add_markers" type="add_markers_node" output="screen">
+  </node>
+</launch>

@@ -14,12 +14,13 @@ xterm -e " roslaunch turtlebot_gazebo amcl_demo.launch map_file:=/home/workspace
 sleep 6
 
 # lauch add markers node
-xterm -e " rosrun add_markers add_markers_node --use_time_delay=false " &
+#xterm -e " rosrun add_markers add_markers_node --use_time_delay=false " &
+xterm -e " roslaunch add_markers add_markers.launch " &
 sleep 5
 
 # launch robot position publisher
-xterm -e " rosrun robot_pose_publisher robot_pose_publisher " &
-sleep 5
+#xterm -e " rosrun robot_pose_publisher robot_pose_publisher " &
+#sleep 5
 
 # launch pick object node
 xterm -e " rosrun pick_objects pick_objects_node " &
