@@ -51,8 +51,9 @@ Launches gazebo, robot model, rviz, gmapper and teleoperation package. Use the k
 
 ```
 $ ./src/scripts/test_slam.sh 
-
-save the map:
+```
+Save the map.
+```
 $ rosrun map_server map_saver -f <map-name>
 ```
 
