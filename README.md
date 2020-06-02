@@ -9,7 +9,7 @@ Simple ROS/Gazebo project with mapping and navigation to make a home service rob
 Gazebo world with mobile robot:
 ![][image1]
 
-Rviz in a object pick up and drop off scenario:
+Rviz in an object pick up and drop off scenario:
 ![][image2]
 
 
